@@ -77,17 +77,9 @@ ul li a.active {
 
 .container {
   height: calc(100vh - 80px);
-  padding: 5%;
+  padding: 100px 5%;
 }
 
 .Toastify__toast-body {
   font-family: 'Oswald', sans-serif;
-}
-
-@media screen and (min-width: 768px) {
-  .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
 }
