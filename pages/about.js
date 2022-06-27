@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 
 import { Loader } from 'components';
+import Meta from 'components/Meta';
 
 const AboutPage = () => {
   const { isLoading } = useSelector((state) => state.app);

@@ -7,18 +7,18 @@ import Xmark from './icons/xmark-solid.svg';
 import styles from './styles/Navbar.module.scss';
 
 export const Navbar = () => {
-  const [show, setShow] = useState(false);
+  const [menuState, setMenuState] = useState(false);
   const ref = useRef(null);
 
   const handleEscape = (e) => {
     if (e.key === 'Escape') {
-      setShow(false);
+      setMenuState(false);
     }
   };
 
   const handleOtsideClick = (e) => {
     if (ref.current && !ref.current.contains(e.target)) {
-      setShow(false);
+      setMenuState(false);
     }
   };
 
@@ -31,12 +31,15 @@ export const Navbar = () => {
     };
   });
 
-  const showMenu = show && (
-    <MobileMenu className={styles.mobileMenu} onClick={() => setShow(false)}>
-      <CustomLink href='/projects' onClick={() => setShow(!show)}>
+  const showMenu = menuState && (
+    <MobileMenu
+      className={styles.mobileMenu}
+      onClick={() => setMenuState(false)}
+    >
+      <CustomLink href='/projects' onClick={() => setMenuState(false)}>
         Projects
       </CustomLink>
-      <CustomLink href='/about' onClick={() => setShow(!show)}>
+      <CustomLink href='/about' onClick={() => setMenuState(false)}>
         About
       </CustomLink>
     </MobileMenu>
@@ -51,7 +54,7 @@ export const Navbar = () => {
         <CustomLink href='/about'>About</CustomLink>
         <button>Contacts</button>
       </Menu>
-      <button className={styles.menuIcon} onClick={() => setShow(!show)}>
+      <button className={styles.menuIcon} onClick={() => setMenuState(true)}>
         <Bars style={{ width: 25, height: 25, fill: '#3498db' }} />
       </button>
       {showMenu}
@@ -77,13 +80,13 @@ const MobileMenu = ({ children, className, onClick }) => (
   </nav>
 );
 
-const CustomLink = ({ href, children, props }) => {
+const CustomLink = ({ href, children, props, onClick }) => {
   const router = useRouter();
 
   return (
     <li>
       <Link href={href}>
-        <a className={router.asPath === href ? 'active' : ''} {...props}>
+        <a className={router.asPath === href ? 'active' : ''} onClick={onClick}>
           {children}
         </a>
       </Link>
